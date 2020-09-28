@@ -1,8 +1,8 @@
 from flask import render_template,abort,request,redirect,url_for
 from . import blog
 from flask_login import login_required,current_user
-from ..models import User,Article
-from .forms import UpdateProfile
+from ..models import User,Article,Comment
+from .forms import UpdateProfile,CommentForm
 from .. import db,photos
 from ..requests import get_quotes
 # Views
@@ -92,3 +92,33 @@ def article_by_tag(tag):
     articles=Article.query.filter_by(article_tag=tag).order_by(Article.posted.desc()).all()
     
     return render_template('article_by_tag.html',articles=articles,tag=tag)    
+
+
+@blog.route('/article_details/<article_id>', methods = ['GET','POST'])
+@login_required
+def article_details(article_id):
+
+    '''
+    View article details function that returns article_details and comment form
+    '''
+
+    form = CommentForm()
+    article=Article.query.get(article_id)
+    comments=Comment.query.filter_by(article_id=article_id).order_by(Comment.posted.desc()).all()
+    
+    if form.validate_on_submit():
+        comment = form.comment.data
+        
+        # Updated comment instance
+        new_comment = Comment(comment=comment,user=current_user,article=article)
+
+        # save review method
+        new_comment.save_comment()
+        article.article_comments_count = article.article_comments_count+1
+
+        db.session.add(article)
+        db.session.commit()
+        return redirect(url_for('blog.article_details',article_id=article_id))
+
+    return render_template('article_details.html',comment_form=form,article=article,comments=comments)
+
