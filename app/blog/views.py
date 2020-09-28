@@ -15,7 +15,8 @@ def index():
     '''
     quotes=get_quotes()
     articles=Article.get_all_articles()
-    return render_template('index.html',quotes=quotes,articles=articles)
+    popular=Article.query.order_by(Article.posted.desc()).limit(3).all()
+    return render_template('index.html',quotes=quotes,articles=articles,popular=popular)
 
 
 @blog.route('/profile/<username>')

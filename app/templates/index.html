@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {%block content%}
-<section class="daily-quotes mt-3 ">
+<section class="daily-quotes mt-4 ">
   <div id="carousel-example" class="carousel slide" data-ride="carousel">
     <div style="min-height:33vh" class="carousel-inner row w-100 mx-0" role="listbox">
       <div  class="carousel-item col-12 col-sm-6 col-md-4 col-lg-3 active"  data-interval="2000">
@@ -31,7 +31,7 @@
   </div>
 </section>
       
-<div class="row">
+<div class="row mt-4">
   <div class="col-lg-9 col-md-8 col-sm-12">
     <div class="articles row">
       {%for article in articles%}
@@ -56,7 +56,7 @@
               <p class="mb-0 mt-3"><i class="far fa-calendar mr-2"></i>{{article.posted.strftime("%b %d %Y %H:%M")}}</p>
             </div>
             <h6 class="card-title">{{article.article_title}}</h6>
-            <p class="card-text">{{article.article_body}}</p>
+            <p class="card-text">{{article.article_body|truncate(30)}}</p>
           </div>
           <div class="card-footer text-muted text-center">
             <a href="" class="black-text">
@@ -69,7 +69,22 @@
       {%endfor%}
     </div>
   </div>
-  <div class="col-lg-3 col-md-4 col-sm-12">d</div>
+  <div class="col-lg-3 col-md-4 col-sm-12 text-center">
+    <h5 class="my-2"><strong>Popular Posts</strong> </h5>
+    {%for article in popular%}
+    <div class="card card-image mb-2" style="background-image: url({{url_for('static',filename=article.article_cover_path)}});">
+
+      <div class="text-white text-center rgba-black-strong py-3 px-2">
+        <div>
+          <h5 class="pink-text"><i class="fas fa-chart-pie"></i> {{article.article_title}}</h5>
+          <p>{{article.article_body|truncate(30)}}</p>
+          <a class="btn btn-pink"><i class="fas fa-clone left"></i> Read more ...</a>
+        </div>
+      </div>
+  
+    </div>
+    {%endfor%}
+  </div>
 </div>
 
 
