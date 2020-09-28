@@ -75,7 +75,7 @@ class Article(db.Model):
 
 
     @classmethod
-    def get_all_article(cls):
+    def get_all_articles(cls):
         articles = Article.query.order_by(Article.posted.desc()).all()
         return articles
 

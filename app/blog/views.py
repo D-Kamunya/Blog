@@ -14,7 +14,8 @@ def index():
     View root page function that returns the index page and its data
     '''
     quotes=get_quotes()
-    return render_template('index.html',quotes=quotes)
+    articles=Article.get_all_articles()
+    return render_template('index.html',quotes=quotes,articles=articles)
 
 
 @blog.route('/profile/<username>')
