@@ -69,21 +69,21 @@
       {%endfor%}
     </div>
   </div>
-  <div class="col-lg-3 col-md-4 col-sm-12 text-center">
+  <div class="col-lg-3 col-md-4 col-sm-12">
     <h5 class="my-2"><strong>Tag Cloud</strong> </h5>
     <div class="tags">
-      <a href=""><span class="badge badge-pill badge-default">ALL</span></a>
-      <a href=""></a><span class="badge badge-pill badge-primary">FASHION</span></a>
-      <a href=""><span class="badge badge-pill badge-secondary">ENTERTAINMENT</span></a>
-      <a href=""><span class="badge badge-pill badge-success">FOOD</span></a>
-      <a href=""><span class="badge badge-pill badge-info">WELLNESS</span></a>
-      <a href=""><span class="badge badge-pill badge-warning">MUSIC</span></a>
-      <a href=""><span class="badge badge-pill badge-danger">EDUCATION</span></a>
-      <a href=""><span class="badge badge-pill badge-default">SPORTS</span></a>
-      <a href=""><span class="badge badge-pill badge-light">OTHER</span></a>
+      <a href="#"><span class="badge badge-pill badge-default">ALL</span></a>
+      <a href="{{url_for('blog.article_by_tag',tag='Fashion')}}"><span class="badge badge-pill badge-primary">FASHION</span></a>
+      <a href="{{url_for('blog.article_by_tag',tag='Entertainment')}}"><span class="badge badge-pill badge-secondary">ENTERTAINMENT</span></a>
+      <a href="{{url_for('blog.article_by_tag',tag='Food')}}"><span class="badge badge-pill badge-success">FOOD</span></a>
+      <a href="{{url_for('blog.article_by_tag',tag='Wellness')}}"><span class="badge badge-pill badge-info">WELLNESS</span></a>
+      <a href="{{url_for('blog.article_by_tag',tag='Music')}}"><span class="badge badge-pill badge-warning">MUSIC</span></a>
+      <a href="{{url_for('blog.article_by_tag',tag='Education')}}"><span class="badge badge-pill badge-danger">EDUCATION</span></a>
+      <a href="{{url_for('blog.article_by_tag',tag='Sports')}}"><span class="badge badge-pill badge-default">SPORTS</span></a>
+      <a href="{{url_for('blog.article_by_tag',tag='Others')}}"><span class="badge badge-pill badge-light">OTHERS</span></a>
     </div>
 
-    
+
     <h5 class="my-2"><strong>Popular Posts</strong> </h5>
     {%for article in popular%}
     <div class="card card-image mb-2" style="background-image: url({{url_for('static',filename=article.article_cover_path)}});">

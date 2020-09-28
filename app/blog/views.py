@@ -80,3 +80,15 @@ def new_article():
         return redirect(url_for('blog.index'))
 
     return render_template('new_article.html')  
+
+
+@blog.route('/articles/tag/<tag>')
+@login_required
+def article_by_tag(tag):
+
+    '''
+    View root page function that returns pitch category page with pitches from category selected
+    '''
+    articles=Article.query.filter_by(article_tag=tag).order_by(Article.posted.desc()).all()
+    
+    return render_template('article_by_tag.html',articles=articles,tag=tag)    
