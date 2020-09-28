@@ -4,6 +4,7 @@ from flask_login import login_required,current_user
 from ..models import User
 from .forms import UpdateProfile
 from .. import db,photos
+from ..requests import get_quotes
 # Views
 @blog.route('/')
 @login_required
@@ -12,8 +13,8 @@ def index():
     '''
     View root page function that returns the index page and its data
     '''
-
-    return render_template('index.html')
+    quotes=get_quotes()
+    return render_template('index.html',quotes=quotes)
 
 
 @blog.route('/profile/<username>')

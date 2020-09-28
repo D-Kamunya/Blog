@@ -3,88 +3,32 @@
 <section class="daily-quotes mt-3 ">
   <div id="carousel-example" class="carousel slide" data-ride="carousel">
     <div style="min-height:33vh" class="carousel-inner row w-100 mx-0" role="listbox">
-        <div  class="carousel-item col-12 col-sm-6 col-md-4 col-lg-3 active"  data-interval="2000">
-          <div class="card text-center card-cascade wider mb-1">
-            <div class="view view-cascade gradient-card-header blue-gradient overlay waves-light">
-              <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Slides/img%20(70).jpg"
-              alt="Card image cap">
-            </div>
-            <div class="card-body card-body-cascade text-center">
-             <p><cite><em>“You know its funny when it rains it pours They got money for wars, but cant feed the poor”  </em><br> – Tupac Shakur</cite></p> 
-            </div>
-          </div>  
-        </div>
-        
-        <div class="carousel-item col-12 col-sm-6 col-md-4 col-lg-3" data-interval="2000">
-          <div class="card text-center card-cascade wider">
-            <div class="view view-cascade gradient-card-header blue-gradient overlay waves-light">
-              <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Slides/img%20(70).jpg"
-              alt="Card image cap">
-            </div>
-            <div class="card-body card-body-cascade text-center ">
-              <p class="card-text">ESDFSDGV .</p>
-            </div>
-          </div>   
-        </div>
-        <div class="carousel-item col-12 col-sm-6 col-md-4 col-lg-3" data-interval="2000">
-          <div class="card text-center card-cascade wider">
-            <div class="view view-cascade gradient-card-header blue-gradient overlay waves-light">
-              <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Slides/img%20(70).jpg"
-              alt="Card image cap">
-            </div>
-            <div class="card-body card-body-cascade text-center ">
-              <p class="card-text">ESDFSDGV .</p>
-            </div>
-          </div>   
-        </div>
-        <div class="carousel-item col-12 col-sm-6 col-md-4 col-lg-3" data-interval="2000">
-          <div class="card text-center card-cascade wider">
-            <div class="view view-cascade gradient-card-header blue-gradient overlay waves-light">
-              <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Slides/img%20(70).jpg"
-              alt="Card image cap">
-            </div>
-            <div class="card-body card-body-cascade text-center ">
-              <p class="card-text">ESDFSDGV .</p>
-            </div>
-          </div>   
-        </div>
-        <div class="carousel-item col-12 col-sm-6 col-md-4 col-lg-3" data-interval="2000">
-          <div class="card text-center card-cascade wider">
-            <div class="view view-cascade gradient-card-header blue-gradient overlay waves-light">
-              <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Slides/img%20(70).jpg"
-              alt="Card image cap">
-            </div>
-            <div class="card-body card-body-cascade text-center ">
-              <p class="card-text">ESDFSDGV .</p>
-            </div>
-          </div>   
-        </div>
-        <div class="carousel-item col-12 col-sm-6 col-md-4 col-lg-3" data-interval="2000">
-          <div class="card text-center card-cascade wider">
-            <div class="view view-cascade gradient-card-header blue-gradient overlay waves-light">
-              <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Slides/img%20(70).jpg"
-              alt="Card image cap">
-            </div>
-            <div class="card-body card-body-cascade text-center ">
-              <p class="card-text">ESDFSDGV .</p>
-            </div>
-          </div>   
-        </div>
-        <div class="carousel-item col-12 col-sm-6 col-md-4 col-lg-3" data-interval="2000">
-          <div class="card text-center card-cascade wider">
-            <div class="view view-cascade gradient-card-header blue-gradient overlay waves-light">
-              <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Slides/img%20(70).jpg"
-              alt="Card image cap">
-            </div>
-            <div class="card-body card-body-cascade text-center ">
-              <p class="card-text">ESDFSDGV .</p>
-            </div>
-          </div>   
-        </div>
-        
+      <div  class="carousel-item col-12 col-sm-6 col-md-4 col-lg-3 active"  data-interval="2000">
+        <div class="card text-center card-cascade wider mb-1">
+          <div class="view view-cascade gradient-card-header blue-gradient overlay waves-light">
+            <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Slides/img%20(70).jpg"
+            alt="Card image cap">
+          </div>
+          <div class="card-body card-body-cascade text-center">
+            <p><cite><em>“You know its funny when it rains it pours They got money for wars, but cant feed the poor”  </em><br> – Tupac Shakur</cite></p> 
+          </div>
+        </div>  
+      </div>
+      {% for quote in quotes %}
+      <div  class="carousel-item col-12 col-sm-6 col-md-4 col-lg-3"  data-interval="2000">
+        <div class="card text-center card-cascade wider mb-1">
+          <div class="view view-cascade gradient-card-header blue-gradient overlay waves-light">
+            <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Slides/img%20(70).jpg"
+            alt="Card image cap">
+          </div>
+          <div class="card-body card-body-cascade text-center">
+            <p><cite><em>“{{quote.quote_text|truncate(90)}}”  </em><br> – {{quote.quote_author}}</cite></p> 
+          </div>
+        </div>  
+      </div>
+      {%endfor%}
     </div>
-  
-</div>
+  </div>
 </section>
       
 <div  ><h2>ggg</h2></div>
