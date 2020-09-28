@@ -3,7 +3,7 @@ from . import blog
 from flask_login import login_required,current_user
 from ..models import User
 from .forms import UpdateProfile
-
+from .. import db
 # Views
 @blog.route('/')
 @login_required
