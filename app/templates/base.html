@@ -30,10 +30,11 @@
 
 <body class="body">
     {%block navbar%}
-     
+    {% include 'navbar.html' %}
     {%endblock navbar%}
 
-  <div style="padding-top:56px" class="content container">
+    
+  <div style="padding-top:65px" class="content container">
   {% block content %}{% endblock content %}
   </div>
 
