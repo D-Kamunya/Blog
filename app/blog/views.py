@@ -1,7 +1,8 @@
-from flask import render_template,abort
+from flask import render_template,abort,request,redirect,url_for
 from . import blog
 from flask_login import login_required,current_user
 from ..models import User
+from .forms import UpdateProfile
 
 # Views
 @blog.route('/')
@@ -27,5 +28,26 @@ def profile(username):
     if user is None:
         abort(404)
  
-    return render_template("profile/profile.html", user = user)      
+    return render_template("profile/profile.html", user = user)     
+    
+
+@blog.route('/profile/<username>/update',methods = ['GET','POST'])
+@login_required
+def update_profile(username):
+    user = User.query.filter_by(username = username).first()
+    if user is None:
+        abort(404)
+
+    form = UpdateProfile()
+
+    if form.validate_on_submit():
+        user.bio = form.bio.data
+        print(form)
+        print(form.bio)
+        db.session.add(user)
+        db.session.commit()
+
+        return redirect(url_for('blog.profile',username=user.username))
+
+    return render_template('profile/update.html',user=user,form =form)    
 
