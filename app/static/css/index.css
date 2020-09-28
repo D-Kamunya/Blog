@@ -272,3 +272,9 @@ border-radius: 3px;
       visibility: visible;
   }
 }
+
+
+.article-form{
+  width:50%;
+  height: 50%;
+}
