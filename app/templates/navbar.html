@@ -40,7 +40,7 @@
     <ul class="navbar-nav ml-auto">
       {% if current_user.is_authenticated %}
       <li class="nav-item">
-        <a class="nav-link" href=""><span class="badge badge-primary"><i class="fas fa-user"></i> {{current_user.username | capitalize}}</span>
+        <a class="nav-link" href="{{url_for('blog.profile',username=current_user.username)}}"><span class="badge badge-primary"><i class="fas fa-user"></i> {{current_user.username | capitalize}}</span>
         </a>
       </li>
       <li class="nav-item">
