@@ -1,7 +1,7 @@
 from flask import render_template,abort,request,redirect,url_for
 from . import blog
 from flask_login import login_required,current_user
-from ..models import User
+from ..models import User,Article
 from .forms import UpdateProfile
 from .. import db,photos
 from ..requests import get_quotes
@@ -60,3 +60,21 @@ def update_pic(username):
         user.profile_pic_path = path
         db.session.commit()
     return redirect(url_for('blog.update_profile',username=username))  
+
+
+
+@blog.route('/article/new',methods= ['GET','POST'])
+@login_required
+def new_article():
+    if request.method=='POST':
+        article_title=request.form['title']
+        article_body=request.form['body']
+        article_tag=request.form['tag']
+        filename = photos.save(request.files['photo'])
+        article_cover_path=f'photos/{filename}'
+        
+        new_article=Article(article_title=article_title,article_body=article_body,article_tag=article_tag,article_cover_path=article_cover_path,user=current_user)
+        new_article.save_article()
+        return redirect(url_for('blog.index'))
+
+    return render_template('new_article.html')  

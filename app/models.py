@@ -59,7 +59,7 @@ class Article(db.Model):
     __tablename__ = 'articles'
 
     id = db.Column(db.Integer,primary_key = True)
-    artile_title = db.Column(db.String)
+    article_title = db.Column(db.String)
     article_body = db.Column(db.String)
     article_tag = db.Column(db.String)
     article_cover_path = db.Column(db.String())
