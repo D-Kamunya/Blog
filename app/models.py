@@ -21,7 +21,9 @@ class User(UserMixin,db.Model):
     profile_pic_path = db.Column(db.String())
     pass_secure = db.Column(db.String(255))
     articles = db.relationship('Article',backref = 'user',lazy = "dynamic")
-   
+    comments = db.relationship('Comment',backref = 'user',lazy = "dynamic")
+    
+    
     @property
     def password(self):
         raise AttributeError('You cannot read the password attribute')
@@ -67,7 +69,7 @@ class Article(db.Model):
     article_upvotes = db.Column(db.Integer, default=0)
     article_downvotes = db.Column(db.Integer, default=0)
     user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
-
+    comments = db.relationship('Comment',backref = 'article',lazy = "dynamic")
 
     def save_article(self):
         db.session.add(self)
@@ -83,3 +85,21 @@ class Article(db.Model):
     def get_user_articles(cls,id):
         articles = Article.query.filter_by(user_id=id).order_by(Article.posted.desc()).all()
         return articles          
+
+
+
+class Comment(db.Model):
+
+    'Comment model schema'
+    
+    __tablename__ = 'comments'
+
+    id = db.Column(db.Integer,primary_key = True)
+    comment = db.Column(db.String)
+    posted = db.Column(db.DateTime,default=datetime.utcnow)
+    user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
+    article_id = db.Column(db.Integer,db.ForeignKey("articles.id"))
+
+    def save_comment(self):
+        db.session.add(self)
+        db.session.commit()
