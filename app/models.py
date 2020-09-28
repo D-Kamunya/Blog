@@ -65,6 +65,7 @@ class Article(db.Model):
     article_body = db.Column(db.String)
     article_tag = db.Column(db.String)
     article_cover_path = db.Column(db.String())
+    article_comments_count = db.Column(db.Integer, default=0)
     posted = db.Column(db.DateTime,default=datetime.utcnow)
     article_upvotes = db.Column(db.Integer, default=0)
     article_downvotes = db.Column(db.Integer, default=0)
