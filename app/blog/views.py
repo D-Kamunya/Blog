@@ -1,4 +1,4 @@
-from flask import render_template,abort,request,redirect,url_for
+from flask import render_template,abort,request,redirect,url_for,flash
 from . import blog
 from flask_login import login_required,current_user
 from ..models import User,Article,Comment
@@ -48,6 +48,8 @@ def update_profile(username):
         db.session.add(user)
         db.session.commit()
 
+        flash('User bio updated')
+
         return redirect(url_for('blog.profile',username=user.username))
 
     return render_template('profile/update.html',user=user,form =form)    
@@ -61,6 +63,9 @@ def update_pic(username):
         path = f'photos/{filename}'
         user.profile_pic_path = path
         db.session.commit()
+
+        flash('User pic updated')
+        
     return redirect(url_for('blog.update_profile',username=username))  
 
 
@@ -77,6 +82,8 @@ def new_article():
         
         new_article=Article(article_title=article_title,article_body=article_body,article_tag=article_tag,article_cover_path=article_cover_path,user=current_user)
         new_article.save_article()
+
+        flash('Article added')
         return redirect(url_for('blog.index'))
 
     return render_template('new_article.html')  
@@ -118,6 +125,7 @@ def article_details(article_id):
 
         db.session.add(article)
         db.session.commit()
+        flash('Comment posted')
         return redirect(url_for('blog.article_details',article_id=article_id))
 
     return render_template('article_details.html',comment_form=form,article=article,comments=comments)
@@ -131,7 +139,8 @@ def article_upvote(article_id):
     article=Article.query.get(article_id)
     article.article_upvotes=article.article_upvotes+1
     db.session.add(article)
-    db.session.commit()  
+    db.session.commit() 
+    flash('You liked this article') 
     return redirect(url_for('blog.article_details',article_id=article_id)) 
 
 
@@ -145,6 +154,7 @@ def article_downvote(article_id):
     article.article_downvotes=article.article_downvotes+1
     db.session.add(article)
     db.session.commit()  
+    flash('You disliked this article')
     return redirect(url_for('blog.article_details',article_id=article_id))         
 
 
@@ -158,7 +168,7 @@ def delete_comment(comment_id,article_id):
     article.article_comments_count = article.article_comments_count-1
     db.session.add(article)
     db.session.commit()
-
+    flash('You deleted a comment')
     return redirect(url_for('blog.article_details',article_id=article_id))
 
 
@@ -168,4 +178,5 @@ def delete_article(article_id):
   article = Article.query.get(article_id)
   db.session.delete(article)
   db.session.commit()
+  flash('You deleted an article')
   return redirect(url_for('blog.index'))    
