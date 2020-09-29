@@ -160,3 +160,12 @@ def delete_comment(comment_id,article_id):
     db.session.commit()
 
     return redirect(url_for('blog.article_details',article_id=article_id))
+
+
+@blog.route('/article/delete/<article_id>')
+@login_required
+def delete_article(article_id):
+  article = Article.query.get(article_id)
+  db.session.delete(article)
+  db.session.commit()
+  return redirect(url_for('blog.index'))    
