@@ -1,5 +1,7 @@
+from flask import abort
 import urllib.request,json
 from .models import Quote
+
 # Quotes api base url
 quotes_base_url = "http://quotes.stormconsultancy.co.uk/random.json"
 
@@ -19,7 +21,9 @@ def get_quotes():
       quote_text=get_quotes_response['quote']
       quote_author=get_quotes_response['author']
       quote_obj=Quote(quote_id,quote_text,quote_author)
-      quotes.append(quote_obj)     
+      quotes.append(quote_obj)
+    else:
+      abort(500)       
     count=count+1
       
 

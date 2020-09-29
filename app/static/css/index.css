@@ -6,10 +6,11 @@
  }
 
 .navbar-brand{
-  font: 18px 'opensans-bold', sans-serif;
+  font-family: 'Satisfy', sans-serif;
 }
 .nav-link{
   font-family:'Sintony', sans-serif;
+  color: #fff;
 }
 .card-up{
   height: 200px;
