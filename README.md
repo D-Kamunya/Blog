@@ -11,7 +11,7 @@
 my-blog V1.0
 
 ## Description
-This is a flask multi-user blog application where a user can post and delete blog articles,comment on articles an also get inspired by daily quotes.The live link to the site is
+This is a flask multi-user blog application where a user can post and delete blog articles,comment on articles an also get inspired by daily quotes.The live link to the site is https://myy-blog.herokuapp.com/ 
 
 
 ## Technologies Used
