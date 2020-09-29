@@ -146,3 +146,17 @@ def article_downvote(article_id):
     db.session.add(article)
     db.session.commit()  
     return redirect(url_for('blog.article_details',article_id=article_id))         
+
+
+
+@blog.route('/comment/delete/<comment_id>/<article_id>')
+@login_required
+def delete_comment(comment_id,article_id):
+    comment = Comment.query.get(comment_id)
+    db.session.delete(comment)
+    article=Article.query.get(article_id)
+    article.article_comments_count = article.article_comments_count-1
+    db.session.add(article)
+    db.session.commit()
+
+    return redirect(url_for('blog.article_details',article_id=article_id))
