@@ -15,7 +15,7 @@ def index():
     '''
     quotes=get_quotes()
     articles=Article.get_all_articles()
-    popular=Article.query.order_by(Article.posted.desc()).limit(3).all()
+    popular=Article.query.order_by(Article.article_upvotes.desc()).limit(3).all()
     return render_template('index.html',quotes=quotes,articles=articles,popular=popular)
 
 
@@ -122,3 +122,27 @@ def article_details(article_id):
 
     return render_template('article_details.html',comment_form=form,article=article,comments=comments)
 
+@blog.route('/article_upvote/<article_id>')
+@login_required
+def article_upvote(article_id):
+    '''
+    View function to add do upvote on article like btn click
+    '''
+    article=Article.query.get(article_id)
+    article.article_upvotes=article.article_upvotes+1
+    db.session.add(article)
+    db.session.commit()  
+    return redirect(url_for('blog.article_details',article_id=article_id)) 
+
+
+@blog.route('/article_downvote/<article_id>')
+@login_required
+def article_downvote(article_id):
+    '''
+    View function to add downvote on article dislike btn click
+    '''
+    article=Article.query.get(article_id)
+    article.article_downvotes=article.article_downvotes+1
+    db.session.add(article)
+    db.session.commit()  
+    return redirect(url_for('blog.article_details',article_id=article_id))         

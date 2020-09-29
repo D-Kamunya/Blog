@@ -10,7 +10,7 @@ def get_quotes():
 
   count=0
   quotes=[]
-  while count!=10:
+  while count!=7:
     with urllib.request.urlopen(quotes_base_url) as url:
         get_quotes_data = url.read()
         get_quotes_response = json.loads(get_quotes_data)

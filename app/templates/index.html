@@ -47,7 +47,7 @@
           <div class="card-body pt-1 mt-0">
             <div class="text-center">
               <a href="#" class="badge badge-default">{{article.user.username}}</a>
-              <a href="" class="badge badge-info">{{article.article_tag}}</a>
+              <a href="{{url_for('blog.article_by_tag',tag=article.article_tag)}}" class="badge badge-info">{{article.article_tag}}</a>
             </div>
             <div class="text-center mb-1">
               <a href="{{url_for('blog.article_details',article_id=article.id)}}"><span class="badge badge-success ml-2"> <i class="far fa-thumbs-up">{{article.article_upvotes}}</i></span></a>
